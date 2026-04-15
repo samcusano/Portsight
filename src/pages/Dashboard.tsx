@@ -6,6 +6,7 @@ import type { TaskType } from '../data/tasks';
 import AlertBanner from '../components/shared/AlertBanner';
 import TaskCard from '../components/TaskCard/TaskCard';
 import ExposureSummaryBar from '../components/ExposureSummaryBar';
+import FilterDropdown from '../components/shared/FilterDropdown';
 import './Dashboard.css';
 
 type TypeFilter = 'All' | TaskType;
@@ -87,31 +88,22 @@ function DashboardQueue() {
   return (
     <div className="dash-queue">
       <div className="dash-queue__header">
-        {/* Filter bar */}
-        <div className="dash-filter-bar">
-          <div className="dash-filter-bar__group" role="group" aria-label="Filter by type">
-            {TYPE_FILTERS.map(f => (
-              <button
-                key={f}
-                className={`dash-chip${typeFilter === f ? ' dash-chip--active' : ''}`}
-                onClick={() => setTypeFilter(f)}
-              >
-                {typeFilterLabel(f)}
-              </button>
-            ))}
-          </div>
-          <div className="dash-filter-bar__divider" aria-hidden="true" />
-          <div className="dash-filter-bar__group" role="group" aria-label="Filter by time horizon">
-            {HORIZON_FILTERS.map(f => (
-              <button
-                key={f}
-                className={`dash-chip${horizonFilter === f ? ' dash-chip--active' : ''}`}
-                onClick={() => setHorizonFilter(f)}
-              >
-                {f === 'All' ? 'Any deadline' : f}
-              </button>
-            ))}
-          </div>
+        {/* Filter toolbar */}
+        <div className="dash-toolbar">
+          <FilterDropdown
+            label="Type"
+            options={TYPE_FILTERS}
+            value={typeFilter}
+            onChange={setTypeFilter}
+            displayValue={typeFilterLabel}
+          />
+          <FilterDropdown
+            label="Deadline"
+            options={HORIZON_FILTERS}
+            value={horizonFilter}
+            onChange={setHorizonFilter}
+            displayValue={(f) => f === 'All' ? 'Any deadline' : f}
+          />
           {filtersActive && (
             <button className="dash-filter-bar__clear" onClick={clearFilters}>
               Clear filters

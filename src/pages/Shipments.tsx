@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AlertBanner from '../components/shared/AlertBanner';
 import ShipmentRow from '../components/shared/ShipmentRow';
+import FilterDropdown from '../components/shared/FilterDropdown';
 import type { ShipmentData } from '../components/shared/ShipmentRow';
 import './Shipments.css';
 
@@ -198,76 +198,6 @@ type SeverityFilter = typeof SEVERITY_FILTERS[number];
 type SortKey = 'eta' | 'risk' | 'route';
 const SEVERITY_ORDER: Record<string, number> = { critical: 0, watch: 1, clear: 2 };
 
-// ── Filter dropdown ─────────────────────────────────────────────────────────
-interface FilterDropdownProps<T extends string> {
-  label: string;
-  options: readonly T[];
-  value: T;
-  onChange: (v: T) => void;
-  countFor?: (v: T) => number;
-  activeClass?: string;
-}
-
-function FilterDropdown<T extends string>({
-  label,
-  options,
-  value,
-  onChange,
-  countFor,
-  activeClass,
-}: FilterDropdownProps<T>) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-    function handleOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    }
-    document.addEventListener('mousedown', handleOutside);
-    return () => document.removeEventListener('mousedown', handleOutside);
-  }, [open]);
-
-  const isDefault = value === options[0];
-
-  return (
-    <div className="sm-dropdown" ref={ref}>
-      <button
-        className={[
-          'sm-dropdown-btn',
-          open ? 'sm-dropdown-btn--open' : '',
-          !isDefault && activeClass ? activeClass : '',
-        ].filter(Boolean).join(' ')}
-        onClick={() => setOpen(o => !o)}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-      >
-        <span className="sm-dropdown-label">{label}</span>
-        <span className="sm-dropdown-value">{value}</span>
-        <ChevronDown size={10} className="sm-dropdown-chevron" aria-hidden="true" />
-      </button>
-      {open && (
-        <div className="sm-dropdown-list" role="listbox">
-          {options.map(opt => (
-            <button
-              key={opt}
-              role="option"
-              aria-selected={value === opt}
-              className={`sm-dropdown-option${value === opt ? ' sm-dropdown-option--active' : ''}`}
-              onClick={() => { onChange(opt); setOpen(false); }}
-            >
-              <span>{opt}</span>
-              {countFor && opt !== options[0] && (
-                <span className="sm-dropdown-count">{countFor(opt)}</span>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 // ── Page ────────────────────────────────────────────────────────────────────
 const Shipments = () => {
   const navigate = useNavigate();
@@ -375,9 +305,9 @@ const Shipments = () => {
             onChange={setSeverityFilter}
             countFor={countFor}
             activeClass={
-              severityFilter === 'Critical' ? 'sm-dropdown-btn--critical' :
-              severityFilter === 'Watch' ? 'sm-dropdown-btn--watch' :
-              severityFilter === 'On Track' ? 'sm-dropdown-btn--clear' : ''
+              severityFilter === 'Critical' ? 'fd-dropdown-btn--critical' :
+              severityFilter === 'Watch' ? 'fd-dropdown-btn--watch' :
+              severityFilter === 'On Track' ? 'fd-dropdown-btn--clear' : ''
             }
           />
 
@@ -387,7 +317,7 @@ const Shipments = () => {
             value={exceptionFilter}
             onChange={setExceptionFilter}
             countFor={exCountFor}
-            activeClass="sm-dropdown-btn--watch"
+            activeClass="fd-dropdown-btn--watch"
           />
 
           {/* Sort */}
