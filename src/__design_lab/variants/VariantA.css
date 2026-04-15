@@ -1,0 +1,240 @@
+/* Variant A — Fleet Mirror
+   Assignments rows in the Fleet (Shipments) visual language.
+   4-column grid, severity dots, progress bar, meta column. */
+
+.va {
+  background: var(--bg-color);
+  min-height: 100vh;
+  padding: var(--space-4) 0;
+}
+
+/* List header */
+.va-list-header {
+  display: grid;
+  grid-template-columns: 260px 1fr 200px 120px;
+  gap: 16px;
+  padding: 8px var(--spacing-unit);
+  border-bottom: 1px solid var(--line-color);
+  background: var(--surface);
+}
+.va-list-header span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-4);
+}
+
+/* Item wrapper */
+.va-item {
+  border-bottom: 1px solid var(--line-color);
+}
+
+/* Row */
+.va-row {
+  display: grid;
+  grid-template-columns: 260px 1fr 200px 120px;
+  gap: 16px;
+  align-items: center;
+  padding: 12px var(--spacing-unit);
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background var(--duration-base), border-color var(--duration-base);
+  outline: none;
+}
+.va-row:hover { background: rgba(234,226,204,0.02); border-left-color: var(--line-em); }
+.va-row:focus-visible { outline: 2px solid var(--brass); outline-offset: -2px; }
+.va-item--open .va-row { background: rgba(204,158,46,0.04); border-left-color: var(--brass); }
+
+/* Identity */
+.va-identity {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.va-dot-wrap {
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+.va-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.va-dot--no-action { background: var(--critical-red); box-shadow: 0 0 6px var(--critical-red); }
+.va-dot--queued    { background: var(--brass); }
+.va-dot--in-progress { background: var(--clear); }
+
+.va-id-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+
+.va-id-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.va-id-rank {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.va-id-sep { color: var(--ink-4); font-size: 10px; }
+.va-id-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.va-id-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.va-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border: 1px solid var(--line-color);
+  color: var(--ink-4);
+  background: transparent;
+}
+.va-tag--compliance  { color: var(--critical-red); border-color: var(--critical-border); background: var(--critical-dim); }
+.va-tag--regulatory  { color: var(--brass); border-color: var(--brass-border); background: var(--brass-dim); }
+.va-tag--congestion  { color: var(--brass); border-color: var(--brass-border); background: var(--brass-dim); }
+.va-tag--count       { color: var(--ink-4); }
+.va-tag--no-action   { color: var(--critical-red); border-color: var(--critical-border); background: var(--critical-dim); }
+.va-tag--queued      { color: var(--brass); border-color: var(--brass-border); background: var(--brass-dim); }
+.va-tag--in-progress { color: var(--clear); border-color: var(--clear-border); background: var(--clear-dim); }
+
+/* Failure mode */
+.va-failure {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+/* Time bar */
+.va-time { display: flex; flex-direction: column; gap: 5px; }
+
+.va-bar {
+  position: relative;
+  height: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--line-color);
+}
+.va-bar-fill {
+  height: 100%;
+  transition: width var(--duration-slow);
+}
+.va-bar--no-action .va-bar-fill    { background: var(--critical-red); }
+.va-bar--queued    .va-bar-fill    { background: var(--brass); }
+.va-bar--in-progress .va-bar-fill  { background: var(--clear); }
+
+.va-bar-head {
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--bg-color);
+}
+.va-bar--no-action   .va-bar-head  { background: var(--critical-red); }
+.va-bar--queued      .va-bar-head  { background: var(--brass); }
+.va-bar--in-progress .va-bar-head  { background: var(--clear); }
+
+.va-time-meta { display: flex; align-items: center; gap: 8px; }
+.va-time-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--ink-4);
+}
+.va-time-label--no-action { color: var(--critical-red); font-weight: 600; }
+.va-time-label--queued    { color: var(--brass); }
+
+/* Meta */
+.va-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.va-exposure {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.va-open {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--critical-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Drill panel */
+.va-drill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-3) var(--spacing-unit) var(--space-3) calc(var(--spacing-unit) + 3px);
+  border-top: 1px solid var(--line-color);
+  border-left: 3px solid var(--brass);
+  background: var(--surface);
+  animation: va-open 150ms ease both;
+}
+@keyframes va-open {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) { .va-drill { animation: none; } }
+
+.va-drill-detail { display: flex; flex-direction: column; gap: 3px; }
+.va-drill-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+}
+.va-drill-value {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.va-drill-actions { display: flex; gap: var(--space-2); }
+.va-btn {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 5px 12px;
+  border: 1px solid var(--line-color);
+  background: none;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: border-color var(--duration-base), color var(--duration-base);
+}
+.va-btn:hover { border-color: var(--line-em); color: var(--text-color); }
+.va-btn--escalate { color: var(--critical-red); border-color: var(--critical-border); background: var(--critical-dim); }
+.va-btn--escalate:hover { background: rgba(220,90,40,0.16); border-color: var(--critical-red); }
+.va-btn--reassign { color: var(--brass); border-color: var(--brass-border); background: var(--brass-dim); }
+.va-btn--reassign:hover { background: rgba(204,158,46,0.16); border-color: var(--brass); }

@@ -1,0 +1,47 @@
+/* ── EXPOSURE SUMMARY BAR ─────────────────────────────────────────────────── */
+
+.exp-bar {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line-color);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.exp-bar__tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-5);
+  min-width: 120px;
+}
+
+.exp-bar__divider {
+  width: 1px;
+  background: var(--line-color);
+  align-self: stretch;
+  margin: var(--space-3) 0;
+}
+
+.exp-bar__value {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-color);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.exp-bar__value--exposure { color: var(--brass); }
+.exp-bar__value--critical { color: var(--critical-red); }
+.exp-bar__value--warning  { color: var(--brass); }
+.exp-bar__value--muted    { color: var(--ink-3); }
+
+.exp-bar__label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ink-4);
+}

@@ -1,0 +1,212 @@
+/* ── ASSIGNMENTS — Signal Stack, Option 1 ────────────────────────────────
+   Left edge = urgency tier (red / amber / green).
+   Row 1: name · task count badge.
+   Row 2: failure mode · exposure · time · Escalate · Reassign · Message.
+   No expand/collapse. No drill panel. CFO acts immediately.
+   ─────────────────────────────────────────────────────────────────────── */
+
+.assignments-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Stat strip */
+.assign-stat-strip {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: var(--space-3) var(--spacing-unit);
+  border-bottom: 1px solid var(--line-color);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+.assign-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0 var(--space-4);
+}
+.assign-stat:first-child { padding-left: 0; }
+.assign-stat-divider {
+  width: 1px;
+  background: var(--line-color);
+  align-self: stretch;
+  margin: 2px 0;
+}
+.assign-stat-value {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.assign-stat-value--brass    { color: var(--brass); }
+.assign-stat-value--critical { color: var(--critical-red); }
+.assign-stat-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-4);
+}
+
+/* List */
+.assign-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Item — the row unit */
+.assign-item {
+  border-bottom: 1px solid var(--line-color);
+  border-left: 3px solid transparent;
+  transition: background var(--duration-base);
+}
+.edge--critical { border-left-color: var(--critical-red); }
+.edge--warning  { border-left-color: var(--brass); }
+.edge--clear    { border-left-color: var(--clear); }
+
+.assign-item:hover { background: rgba(234,226,204,0.018); }
+
+/* Row layout */
+.assign-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--spacing-unit) var(--space-3) calc(var(--spacing-unit) - 3px);
+}
+
+/* Avatar */
+.assign-avatar-wrap {
+  flex-shrink: 0;
+}
+.assign-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  border: 1.5px solid;
+  flex-shrink: 0;
+}
+.assign-avatar--edge--critical { color: var(--critical-red); border-color: var(--critical-border); background: var(--critical-dim); }
+.assign-avatar--edge--warning  { color: var(--brass);        border-color: var(--brass-border);    background: var(--brass-dim);    }
+.assign-avatar--edge--clear    { color: var(--clear);        border-color: var(--clear-border);    background: var(--clear-dim);    }
+
+/* Body */
+.assign-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.assign-body-1,
+.assign-body-2 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+/* Row 1 */
+.assign-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+.assign-task-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 1px 5px;
+  border: 1px solid var(--line-color);
+  color: var(--ink-4);
+  flex-shrink: 0;
+}
+
+/* Row 2 */
+.assign-failure {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.3;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.assign-exposure {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-color);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.assign-time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  flex-shrink: 0;
+  min-width: 28px;
+  text-align: right;
+}
+.assign-time--critical { color: var(--critical-red); }
+.assign-time--warning  { color: var(--brass); }
+
+/* Actions — always visible, right-anchored, secondary style (no fill) */
+.assign-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.assign-action {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 3px 9px;
+  border: 1px solid var(--line-color);
+  background: none;
+  color: var(--ink-4);
+  cursor: pointer;
+  transition: border-color var(--duration-base), color var(--duration-base);
+  white-space: nowrap;
+}
+.assign-action:hover {
+  border-color: var(--line-em);
+  color: var(--text-color);
+}
+.assign-action:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+}
+.assign-action--escalate {
+  color: var(--critical-red);
+  border-color: var(--critical-border);
+}
+.assign-action--escalate:hover {
+  border-color: var(--critical-red);
+}
+.assign-action--reassign {
+  color: var(--brass);
+  border-color: var(--brass-border);
+}
+.assign-action--reassign:hover {
+  border-color: var(--brass);
+}

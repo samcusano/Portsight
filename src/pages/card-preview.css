@@ -1,0 +1,1152 @@
+/* ── CARD TREATMENT PREVIEW PAGE ──────────────────────────────────────── */
+
+/* app-content is overflow:hidden + height:100vh — wrap in scrollable root */
+.cp-scroll-root {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.cp-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--spacing-unit) var(--space-8);
+}
+
+.cp-page-header {
+  margin-bottom: var(--space-8);
+  border-bottom: 1px solid var(--line-color);
+  padding-bottom: var(--space-5);
+}
+
+.cp-page-title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: var(--space-2);
+}
+
+.cp-page-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+
+/* ── Section wrapper ──────────────────────────────────────────────────── */
+
+.cp-section {
+  margin-bottom: var(--space-8);
+}
+
+.cp-section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.cp-section-id {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ink-4);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 32px;
+}
+
+.cp-section-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 2px;
+}
+
+.cp-section-desc {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+}
+
+.cp-section-body {
+  border: 1px solid var(--line-color);
+}
+
+/* ── Shared list container ────────────────────────────────────────────── */
+
+.cp-list {
+  background: var(--surface);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   TREATMENT A — CHRONICLE
+   Dense horizontal row. 4px left border encodes urgency by type.
+   Badge, right-aligned data cluster with serif impact hero.
+
+   Design-lead refinements:
+   - Badge: 8px (system spec), border-radius: 0, padding: 2px 7px
+   - Button: 9px mono uppercase, bg-color text, 0.10em tracking (system)
+   - Impact: 20px serif — dominant datum in collapsed row
+   - Time chip: bordered pill using exact system dim/border tokens
+   - Hover uses brass at 0.05 opacity — readable but not glaring
+   - Confidence is tertiary — ink-3 only, no label needed at this density
+   ══════════════════════════════════════════════════════════════════════ */
+
+.cp-a {
+  border-bottom: 1px solid var(--line-color);
+  border-left: 4px solid transparent;
+  transition: border-left-color 150ms ease, background 150ms ease;
+}
+
+.cp-a--compliance,
+.cp-a--shipment-exception { border-left-color: var(--critical-red); }
+.cp-a--congestion          { border-left-color: var(--brass); }
+.cp-a--regulatory          { border-left-color: var(--brass); opacity: 0.85; }
+
+.cp-a__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--spacing-unit);
+}
+
+.cp-a:hover .cp-a__header {
+  background: rgba(204,158,46,0.05);
+}
+
+.cp-a__rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  width: 24px;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+/* Badge: exact system spec — 8px, no radius, line-em border */
+.cp-a__badge {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border: 1px solid var(--line-em);
+  border-radius: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--ink-3);
+}
+
+.cp-a__badge--critical {
+  color: var(--critical-red);
+  border-color: var(--critical-border);
+  background: var(--critical-dim);
+}
+.cp-a__badge--warning {
+  border-style: dashed;
+  color: var(--brass);
+  border-color: var(--brass-border);
+}
+.cp-a__badge--normal {
+  color: var(--ink-3);
+  border-color: var(--line-em);
+}
+
+.cp-a__problem {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.cp-a__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+.cp-a__impact { text-align: right; }
+
+.cp-a__impact-val {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1;
+}
+
+.cp-a__impact-lbl {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+}
+
+/* Time chip: bordered pill — matches system's urgency signaling pattern */
+.cp-a__time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  flex-shrink: 0;
+}
+
+.cp-a__time--critical {
+  color: var(--critical-red);
+  border-color: var(--critical-border);
+  background: var(--critical-dim);
+}
+.cp-a__time--warning {
+  color: var(--brass);
+  border-color: var(--brass-border);
+  background: var(--brass-dim);
+}
+.cp-a__time--normal {
+  color: var(--ink-4);
+  border-color: transparent;
+  background: transparent;
+  padding: 2px 0;
+}
+
+.cp-a__conf {
+  text-align: right;
+  min-width: 32px;
+}
+
+.cp-a__conf-val {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.cp-a__conf-lbl {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 1px;
+}
+
+/* CTA: exact system .btn-primary values, non-full-width in context */
+.cp-a__cta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--brass);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 0;
+  padding: 8px 14px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: background 150ms ease;
+}
+
+.cp-a__cta:hover { background: #B8900A; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TREATMENT B — MANIFEST
+   Two-line entry. Problem statement is the primary read — full, no
+   truncation. Compact mono metadata strip follows on line 2.
+   CTA is an inline text link. Maritime log / legal filing feel.
+
+   Design-lead refinements:
+   - Problem statement: 15px, full text-color — it IS the document
+   - Type label: exact system colors, 9px uppercase — de-emphasized marker
+   - Separator: em-dash (—) instead of · — more formal, nautical log tone
+   - CTA: 9px uppercase, underline, brass — matches system btn-link exactly
+   - Impact inline: bold within the strip — one strong number per row
+   - Left rank anchors the eye; no badge competing for attention
+   ══════════════════════════════════════════════════════════════════════ */
+
+.cp-b {
+  border-bottom: 1px solid var(--line-color);
+  padding: var(--space-4) var(--spacing-unit);
+  transition: background 150ms ease;
+}
+
+.cp-b:hover { background: rgba(234,226,204,0.018); }
+
+.cp-b__main {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+/* Rank: a vertical anchor, brass line to its right */
+.cp-b__rank-col {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: 2px;
+}
+
+.cp-b__rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+
+/* Thin brass vertical rule — visual anchor between rank and body */
+.cp-b__rule {
+  width: 1px;
+  flex: 1;
+  min-height: 24px;
+  background: var(--line-em);
+}
+
+.cp-b__body { flex: 1; min-width: 0; }
+
+/* Primary datum: readable, full-width, no truncation */
+.cp-b__problem {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-color);
+  line-height: 1.45;
+  margin-bottom: var(--space-2);
+}
+
+/* Metadata strip: all mono, compact, one line of operational context */
+.cp-b__strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.cp-b__type {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.cp-b__type--compliance,
+.cp-b__type--shipment-exception { color: var(--critical-red); }
+.cp-b__type--congestion          { color: var(--brass); }
+.cp-b__type--regulatory          { color: var(--ink-3); }
+
+/* Em-dash separator: formal, nautical log tone */
+.cp-b__sep {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  user-select: none;
+}
+
+.cp-b__deadline {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.cp-b__deadline--critical { color: var(--critical-red); }
+.cp-b__deadline--warning  { color: var(--brass); }
+.cp-b__deadline--normal   { color: var(--ink-3); }
+
+/* Impact bold within strip — one dominant number on this line */
+.cp-b__impact {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--ink-2);
+  letter-spacing: 0.04em;
+}
+
+.cp-b__conf {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+
+/* CTA: exact system btn-link values */
+.cp-b__cta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brass);
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cp-b__cta:hover { color: #d4a83a; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TREATMENT C — TERMINAL
+   Five fixed-width tabular columns. All mono. No badge, no border.
+   Type label is fixed-width colored text. Urgency lives in DEADLINE
+   column color and character (▲ for urgent). Bloomberg desk feel.
+
+   Design-lead refinements:
+   - Column header: exact 8px uppercase, line-em bottom border (emphasized)
+   - One serif intrusion: impact value uses var(--font-serif) —
+     the system's dual-personality demands at least one serif moment
+   - Type column: 9px, exactly 10 chars wide for legibility at density
+   - Hover: bg barely perceptible — data density requires minimal noise
+   - Urgent rows: no bg tint — deadline column color carries the signal
+   - Column header divider uses line-em (brass, 0.32) — more presence
+   ══════════════════════════════════════════════════════════════════════ */
+
+.cp-c__header-row {
+  display: flex;
+  align-items: center;
+  padding: var(--space-2) var(--spacing-unit);
+  border-bottom: 1px solid var(--line-em);
+}
+
+.cp-c__header-row .cp-c__col {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.09em;
+  color: var(--ink-4);
+  text-transform: uppercase;
+}
+
+.cp-c {
+  display: flex;
+  align-items: center;
+  padding: 10px var(--spacing-unit);
+  border-bottom: 1px solid var(--line-color);
+  transition: background 100ms ease;
+  cursor: pointer;
+}
+
+.cp-c:hover { background: rgba(234,226,204,0.025); }
+
+/* Base column styles */
+.cp-c__col {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Column widths — fixed, tabular, scannable */
+.cp-c__col--rank    { width: 32px; flex-shrink: 0; color: var(--ink-4); font-size: 11px; }
+.cp-c__col--type    { width: 96px; flex-shrink: 0; }
+.cp-c__col--problem { flex: 1; min-width: 0; padding: 0 var(--space-4); font-size: 13px; color: var(--ink-2); }
+.cp-c__col--impact  { width: 80px; flex-shrink: 0; text-align: right;
+                      /* Serif intrusion: the system's dual personality demands it */
+                      font-family: var(--font-serif); font-size: 15px; font-weight: 700;
+                      color: var(--text-color); }
+.cp-c__col--time    { width: 68px; flex-shrink: 0; text-align: right; font-weight: 600;
+                      font-size: 11px; padding-left: var(--space-3); }
+.cp-c__col--conf    { width: 44px; flex-shrink: 0; text-align: right; color: var(--ink-4);
+                      padding-left: var(--space-3); font-size: 11px; }
+
+/* Type colors — all the urgency signaling lives here and in DEADLINE */
+.cp-c__type--compliance,
+.cp-c__type--shipment-exception { color: var(--critical-red); }
+.cp-c__type--congestion          { color: var(--brass); }
+.cp-c__type--regulatory          { color: var(--ink-3); }
+
+.cp-c__time--critical { color: var(--critical-red); }
+.cp-c__time--warning  { color: var(--brass); }
+.cp-c__time--normal   { color: var(--ink-4); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TREATMENT D — SIGNAL
+   Full-bleed urgency tint per severity. No left border — the bg IS
+   the signal. Two-column: problem left, impact hero right (serif).
+   Taller cards, more reading air. Vertical rule divides columns.
+
+   Design-lead refinements:
+   - Tints: slightly more pronounced — dark navy needs more saturation
+   - Badge removed from left col — redundant alongside bg tint
+     → replaced by type as uppercase mono label (less competing signals)
+   - Impact: italic serif at 26px — Nyght Serif italic signals authority
+     and elegance, right-column hero number
+   - Vertical rule: var(--line-em) not --line-color — emphasized division
+   - Time: moved to standalone line under type label — not orphaned
+   - CTA: not full-width, not primary button — use btn-outline values
+   ══════════════════════════════════════════════════════════════════════ */
+
+.cp-d {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line-color);
+  transition: background 150ms ease;
+}
+
+/* Tints: tuned for visibility on #04101C dark navy base */
+.cp-d--critical { background: rgba(220,90,40,0.08); }
+.cp-d--warning  { background: rgba(204,158,46,0.06); }
+.cp-d--normal   { background: transparent; }
+
+.cp-d:hover.cp-d--critical { background: rgba(220,90,40,0.12); }
+.cp-d:hover.cp-d--warning  { background: rgba(204,158,46,0.10); }
+.cp-d:hover.cp-d--normal   { background: rgba(234,226,204,0.025); }
+
+.cp-d__left {
+  flex: 1;
+  padding: var(--space-4) var(--spacing-unit);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+/* Type + deadline on one line — paired identity markers */
+.cp-d__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.cp-d__rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+
+/* Type label: replaces badge — no border competing with bg tint */
+.cp-d__type {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.cp-d__type--compliance,
+.cp-d__type--shipment-exception { color: var(--critical-red); }
+.cp-d__type--congestion          { color: var(--brass); }
+.cp-d__type--regulatory          { color: var(--ink-3); }
+
+/* Deadline: anchored right in the top strip */
+.cp-d__time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-left: auto;
+}
+
+.cp-d__time--critical { color: var(--critical-red); }
+.cp-d__time--warning  { color: var(--brass); }
+.cp-d__time--normal   { color: var(--ink-4); }
+
+.cp-d__problem {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-color);
+  line-height: 1.45;
+}
+
+/* CTA: btn-outline values — not primary, right bg is already dominant */
+.cp-d__cta {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: var(--brass);
+  border: 1px solid var(--brass-border);
+  border-radius: 0;
+  padding: 6px 12px;
+  transition: background 150ms ease;
+}
+
+.cp-d__cta:hover { background: var(--brass-dim); }
+
+/* Right column: impact hero — emphasized divider, centered authority */
+.cp-d__right {
+  flex-shrink: 0;
+  width: 148px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--space-4) var(--spacing-unit) var(--space-4) var(--space-4);
+  border-left: 1px solid var(--line-em);
+  gap: 4px;
+}
+
+/* Italic serif: authority + elegance — Nyght Serif italic is the system's
+   most expressive typographic register */
+.cp-d__impact-val {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1;
+}
+
+.cp-d__impact-lbl {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.cp-d__conf {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-3);
+  margin-top: var(--space-1);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   TREATMENT E — LOGBOOK
+   Time-first hierarchy. Deadline anchors the dominant left column.
+   In an operational queue, WHEN outranks WHAT — you must know if
+   there are 6 hours or 20 days before you read the problem description.
+   A thin vertical rule separates the time column from the content.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.cp-e {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line-color);
+  transition: background 150ms ease;
+}
+
+.cp-e:hover { background: rgba(234,226,204,0.018); }
+
+/* Time column — dominant left anchor, fixed width */
+.cp-e__time-col {
+  flex-shrink: 0;
+  width: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-3);
+  gap: 4px;
+}
+
+.cp-e__time-val {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.cp-e__time-lbl {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Urgency colors on the time column */
+.cp-e__time-col--critical .cp-e__time-val { color: var(--critical-red); }
+.cp-e__time-col--critical .cp-e__time-lbl { color: var(--critical-red); opacity: 0.6; }
+.cp-e__time-col--warning  .cp-e__time-val { color: var(--brass); }
+.cp-e__time-col--warning  .cp-e__time-lbl { color: var(--brass); opacity: 0.6; }
+.cp-e__time-col--normal   .cp-e__time-val { color: var(--ink-3); }
+.cp-e__time-col--normal   .cp-e__time-lbl { color: var(--ink-4); }
+
+/* Vertical rule — thin brass line separating time from content */
+.cp-e__divider {
+  flex-shrink: 0;
+  width: 1px;
+  background: var(--line-em);
+  margin: var(--space-3) 0;
+}
+
+/* Content zone — rank, badge, problem statement */
+.cp-e__content {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.cp-e__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.cp-e__rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+
+.cp-e__badge {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border: 1px solid var(--line-em);
+  border-radius: 0;
+  color: var(--ink-3);
+}
+
+.cp-e__badge--critical { color: var(--critical-red); border-color: var(--critical-border); background: var(--critical-dim); }
+.cp-e__badge--warning  { border-style: dashed; color: var(--brass); border-color: var(--brass-border); }
+.cp-e__badge--normal   { color: var(--ink-3); }
+
+.cp-e__problem {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+/* Right cluster — impact + CTA */
+.cp-e__right {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--spacing-unit) var(--space-3) var(--space-4);
+}
+
+.cp-e__impact-val {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1;
+}
+
+.cp-e__impact-lbl {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: -2px;
+}
+
+.cp-e__cta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--brass);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 0;
+  padding: 6px 12px;
+  white-space: nowrap;
+  transition: background 150ms ease;
+}
+
+.cp-e__cta:hover { background: #B8900A; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TREATMENT F — GAUGE
+   Full-width urgency fill bar above each row. Bar color and fill
+   encode the urgency score relative to the highest-ranked task.
+   Row content is intentionally minimal — the bar carries urgency.
+   Bars across the list create an immediate visual ranking.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.cp-f {
+  border-bottom: 1px solid var(--line-color);
+  transition: background 150ms ease;
+}
+
+.cp-f:hover { background: rgba(234,226,204,0.018); }
+
+/* Urgency bar track — full card width, above row content */
+.cp-f__bar-track {
+  height: 3px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.cp-f__bar-fill {
+  height: 100%;
+  transition: width var(--duration-slow) ease;
+}
+
+.cp-f__bar-fill--critical { background: var(--critical-red); }
+.cp-f__bar-fill--warning  { background: var(--brass); }
+.cp-f__bar-fill--normal   { background: var(--ink-4); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-f__bar-fill { transition: none; }
+}
+
+/* Row — minimal, uncluttered */
+.cp-f__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--spacing-unit);
+}
+
+.cp-f__rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  width: 24px;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.cp-f__problem {
+  flex: 1;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.cp-f__meta {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.cp-f__impact-val {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color);
+  line-height: 1;
+}
+
+.cp-f__impact-lbl {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+}
+
+.cp-f__cta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--brass);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 0;
+  padding: 6px 12px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: background 150ms ease;
+}
+
+.cp-f__cta:hover { background: #B8900A; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TREATMENT G — WIRE
+   Single-line wire-feed format. Ultra-compact row height (~36px).
+   Like a Reuters ticker or a ship's radio dispatch log.
+   All text flows on one line — only deadline datum gets urgency color.
+   CTA is always visible but subtle; the row is the affordance.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.cp-g {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid var(--line-color);
+  padding: 9px var(--spacing-unit);
+  transition: background 100ms ease;
+  cursor: pointer;
+}
+
+.cp-g:hover { background: rgba(234,226,204,0.025); }
+
+.cp-g__rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+  margin-right: var(--space-3);
+}
+
+/* Type label: fixed width, colored per category */
+.cp-g__type {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  width: 88px;
+}
+
+.cp-g__type--compliance,
+.cp-g__type--shipment-exception { color: var(--critical-red); }
+.cp-g__type--congestion          { color: var(--brass); }
+.cp-g__type--regulatory          { color: var(--ink-3); }
+
+/* Spacer dot between blocks */
+.cp-g__gap {
+  flex-shrink: 0;
+  width: 1px;
+  height: 12px;
+  background: var(--line-em);
+  margin: 0 var(--space-3);
+}
+
+/* Problem — truncated, dominant datum in the line */
+.cp-g__problem {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--ink-2);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Deadline — only colored element in the wire */
+.cp-g__time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.cp-g__time--critical { color: var(--critical-red); }
+.cp-g__time--warning  { color: var(--brass); }
+.cp-g__time--normal   { color: var(--ink-4); }
+
+.cp-g__sep {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  margin: 0 var(--space-2);
+  user-select: none;
+}
+
+.cp-g__impact,
+.cp-g__conf {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  flex-shrink: 0;
+}
+
+/* CTA — always present, text-link register */
+.cp-g__cta {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brass);
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  padding: 0;
+  margin-left: var(--space-4);
+  opacity: 0;
+  transition: opacity 150ms ease;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.cp-g:hover .cp-g__cta { opacity: 1; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TREATMENT H — DOSSIER
+   Intelligence briefing card. Two zones: problem headline above,
+   labeled metadata grid below. An 8px colored classification band
+   anchors the left edge — like a book spine or a security clearance
+   stripe. CTA is a text link at the right end of the metadata row.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.cp-h {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line-color);
+  transition: background 150ms ease;
+}
+
+.cp-h:hover { background: rgba(234,226,204,0.018); }
+
+/* Classification band — 8px vertical stripe at left edge */
+.cp-h__band {
+  flex-shrink: 0;
+  width: 8px;
+}
+
+.cp-h__band--critical { background: var(--critical-red); opacity: 0.7; }
+.cp-h__band--warning  { background: var(--brass); opacity: 0.55; }
+.cp-h__band--normal   { background: var(--ink-4); opacity: 0.4; }
+
+.cp-h__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header zone — rank + problem headline */
+.cp-h__header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--spacing-unit) var(--space-2);
+  border-bottom: 1px solid var(--line-color);
+}
+
+.cp-h__rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.cp-h__problem {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+/* Metadata grid — labeled data cells in a horizontal row */
+.cp-h__meta {
+  display: flex;
+  align-items: stretch;
+  padding: 0 var(--spacing-unit);
+}
+
+.cp-h__cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  padding: var(--space-3) var(--space-4) var(--space-3) 0;
+  border-right: 1px solid var(--line-color);
+  margin-right: var(--space-4);
+  min-width: 64px;
+}
+
+.cp-h__cell:last-child {
+  border-right: none;
+  margin-right: 0;
+}
+
+.cp-h__cell--cta {
+  margin-left: auto;
+  padding-right: 0;
+  align-items: flex-end;
+  justify-content: center;
+  border-right: none;
+  min-width: auto;
+}
+
+.cp-h__cell-lbl {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+}
+
+.cp-h__cell-val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-2);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* Type cell value — colored per category */
+.cp-h__cell-val--type-compliance,
+.cp-h__cell-val--type-shipment-exception { color: var(--critical-red); }
+.cp-h__cell-val--type-congestion          { color: var(--brass); }
+.cp-h__cell-val--type-regulatory          { color: var(--ink-3); }
+
+/* Deadline cell value — colored per urgency */
+.cp-h__cell-val--critical { color: var(--critical-red); }
+.cp-h__cell-val--warning  { color: var(--brass); }
+.cp-h__cell-val--normal   { color: var(--ink-2); }
+
+/* CTA — text link, right-aligned in metadata row */
+.cp-h__cta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brass);
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.cp-h__cta:hover { color: #d4a83a; }

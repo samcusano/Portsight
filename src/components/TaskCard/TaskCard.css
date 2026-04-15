@@ -1,0 +1,302 @@
+/* ── TASK CARD — Manifest treatment ────────────────────────────────────── */
+
+.task-card {
+  border-bottom: 1px solid var(--line-color);
+  transition: background 150ms var(--ease-default);
+}
+
+/* Actioned state — de-emphasize */
+.task-card--actioned {
+  opacity: 0.80;
+}
+
+/* ── Collapsed header ─────────────────────────────────────────────────── */
+
+.task-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--spacing-unit);
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background var(--duration-base) var(--ease-default);
+}
+
+.task-card__header:hover {
+  background: rgba(234,226,204,0.018);
+}
+
+.task-card__header:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: -2px;
+}
+
+/* Rank column — number + thin vertical rule */
+.task-card__rank-col {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: 2px;
+}
+
+.task-card__rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.task-card--actioned .task-card__rank {
+  color: var(--brass);
+  font-size: 13px;
+}
+
+/* Thin brass vertical rule — visual anchor between rank and body */
+.task-card__rule {
+  width: 1px;
+  flex: 1;
+  min-height: 20px;
+  background: var(--line-em);
+}
+
+/* Body column — problem headline + metadata strip */
+.task-card__body-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Problem statement — primary datum, full text, no truncation */
+.task-card__problem {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-color);
+  line-height: 1.4;
+  margin-bottom: var(--space-2);
+}
+
+/* Metadata strip — compact mono, all operational context on one line */
+.task-card__strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Type label — urgency color encodes category */
+.task-card__type {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.task-card__type--compliance,
+.task-card__type--shipment-exception { color: var(--critical-red); }
+.task-card__type--congestion          { color: var(--brass); }
+.task-card__type--regulatory          { color: var(--ink-3); }
+
+/* Em-dash separator — formal, nautical log register */
+.task-card__sep {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  user-select: none;
+}
+
+/* Deadline — urgency-colored when time-sensitive */
+.task-card__deadline {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.task-card__deadline--critical { color: var(--critical-red); }
+.task-card__deadline--warning  { color: var(--brass); }
+.task-card__deadline--normal   { color: var(--ink-3); }
+
+/* Impact — bold within strip, one dominant number on this line */
+.task-card__impact {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--ink-2);
+  letter-spacing: 0.04em;
+}
+
+/* Confidence — tertiary, subdued */
+.task-card__conf {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+
+/* CTA — text link, exact system btn-link values */
+.task-card__cta-wrap {
+  display: inline;
+}
+
+.task-card__cta-btn {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brass);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.task-card__cta-btn:hover { color: #d4a83a; }
+
+/* ── Expanded body ────────────────────────────────────────────────────── */
+
+.task-card__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms var(--ease-default);
+  will-change: max-height;
+  background: var(--bg-color);
+}
+
+.task-card__body.is-open {
+  max-height: 900px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-card__body {
+    transition: none;
+  }
+}
+
+/* Sections inside expanded body */
+.task-card__section {
+  padding: var(--space-4) var(--spacing-unit) var(--space-5) calc(var(--spacing-unit) + 24px + var(--space-3));
+  border-top: 1px solid var(--line-color);
+}
+
+.task-card__section-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ink-4);
+  margin-bottom: var(--space-3);
+}
+
+/* ── Risk drivers + related shipments ─────────────────────────────────── */
+
+.task-card__drivers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.task-card__driver-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.task-card__driver-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.task-card__driver-dot--high   { background: var(--critical-red); }
+.task-card__driver-dot--medium { background: var(--brass); }
+.task-card__driver-dot--low    { background: var(--ink-4); }
+
+.task-card__driver-text {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.task-card__related-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ── Scenario options ─────────────────────────────────────────────────── */
+
+.task-card__scenarios {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.task-card__scenario {
+  flex: 1;
+  min-width: 160px;
+  background: var(--surface);
+  border: 1px solid var(--line-color);
+  padding: var(--space-3) var(--space-4);
+}
+
+.task-card__scenario-label {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: var(--space-1);
+}
+
+.task-card__scenario-outcome {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin-bottom: var(--space-2);
+}
+
+.task-card__scenario-delta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.task-card__scenario-delta--savings { color: var(--clear); }
+.task-card__scenario-delta--cost    { color: var(--critical-red); }
+.task-card__scenario-delta--neutral { color: var(--ink-3); }
+
+.task-card__scenario-prob {
+  margin-top: var(--space-3);
+}
+
+.task-card__prob-track {
+  height: 3px;
+  background: var(--surface-2);
+  border: 1px solid var(--line-color);
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.task-card__prob-fill {
+  height: 100%;
+  background: var(--brass);
+  transition: width var(--duration-slow) var(--ease-default);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-card__prob-fill {
+    transition: none;
+  }
+}

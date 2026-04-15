@@ -1,0 +1,183 @@
+/* Variant B — Command Queue
+   Assignments in the TaskCard / operational-queue visual language.
+   Rank number + vertical brass rule + body column + metadata strip. */
+
+.vb {
+  background: var(--bg-color);
+  min-height: 100vh;
+}
+
+.vb-card {
+  border-bottom: 1px solid var(--line-color);
+  transition: background var(--duration-base);
+}
+
+/* Header button — full-width clickable row */
+.vb-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--spacing-unit);
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background var(--duration-base);
+}
+.vb-header:hover { background: rgba(234,226,204,0.018); }
+.vb-header:focus-visible { outline: 2px solid var(--brass); outline-offset: -2px; }
+.vb-card--open .vb-header { background: rgba(204,158,46,0.04); }
+
+/* Rank column */
+.vb-rank-col {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: 2px;
+}
+.vb-rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.vb-card--open .vb-rank { color: var(--brass); }
+
+.vb-rule {
+  width: 1px;
+  flex: 1;
+  min-height: 20px;
+  background: var(--line-em);
+}
+
+/* Body column */
+.vb-body-col { flex: 1; min-width: 0; }
+
+.vb-problem {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-color);
+  line-height: 1.4;
+  margin-bottom: var(--space-2);
+}
+
+/* Metadata strip */
+.vb-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.vb-type {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.vb-type--compliance  { color: var(--critical-red); }
+.vb-type--regulatory  { color: var(--ink-3); }
+.vb-type--congestion  { color: var(--brass); }
+
+.vb-sep {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  user-select: none;
+}
+.vb-name {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--ink-2);
+  letter-spacing: 0.04em;
+}
+.vb-tasks {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+.vb-deadline {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.vb-deadline--critical { color: var(--critical-red); }
+.vb-deadline--warning  { color: var(--brass); }
+.vb-deadline--normal   { color: var(--ink-3); }
+
+.vb-exposure {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--ink-2);
+  letter-spacing: 0.04em;
+}
+.vb-status {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.vb-status--no-action  { color: var(--critical-red); }
+.vb-status--queued     { color: var(--brass); }
+.vb-status--in-progress { color: var(--clear); }
+
+/* Expanded body */
+.vb-body {
+  border-left: 2px solid var(--brass);
+  margin-left: calc(var(--spacing-unit) + 24px + var(--space-4));
+  animation: vb-open 200ms ease both;
+}
+@keyframes vb-open {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) { .vb-body { animation: none; } }
+
+.vb-section {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--line-color);
+}
+.vb-section-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ink-4);
+  margin-bottom: var(--space-2);
+}
+.vb-section-text {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.vb-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.vb-action-btn {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--brass);
+}
+.vb-action-btn:hover { color: #d4a83a; }
+.vb-action-btn--escalate { color: var(--critical-red); }
+.vb-action-btn--escalate:hover { color: #e8723a; }
+.vb-action-btn--reassign { color: var(--brass); }

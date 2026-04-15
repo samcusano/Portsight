@@ -1,0 +1,119 @@
+/* ── DASHBOARD — Operational Queue ──────────────────────────────────────── */
+
+.dash-queue {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Header */
+.dash-queue__header {
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--line-color);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.dash-queue__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--spacing-unit) var(--space-2);
+}
+
+/* Task list — scrollable */
+.dash-queue__list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Footer — session summary */
+.dash-queue__footer {
+  padding: var(--space-3) var(--spacing-unit);
+  border-top: 1px solid var(--line-color);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+/* Empty state */
+.dash-queue__empty {
+  padding: var(--space-8) var(--spacing-unit);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Filter bar ─────────────────────────────────────────────────────────── */
+
+.dash-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--spacing-unit) var(--space-3);
+  flex-wrap: wrap;
+}
+
+.dash-filter-bar__group {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.dash-filter-bar__divider {
+  width: 1px;
+  height: 16px;
+  background: var(--line-color);
+  flex-shrink: 0;
+  align-self: center;
+  margin: 0 var(--space-1);
+}
+
+.dash-chip {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 4px 10px;
+  border: 1px solid var(--line-color);
+  background: none;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: border-color var(--duration-base) var(--ease-default),
+              color var(--duration-base) var(--ease-default),
+              background var(--duration-base) var(--ease-default);
+}
+
+.dash-chip:hover {
+  border-color: var(--brass-border);
+  color: var(--ink-2);
+}
+
+.dash-chip--active {
+  border-color: var(--brass);
+  color: var(--brass);
+  background: var(--brass-dim);
+}
+
+.dash-filter-bar__clear {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px var(--space-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-left: var(--space-1);
+}
+
+.dash-filter-bar__clear:hover {
+  color: var(--ink-2);
+}
