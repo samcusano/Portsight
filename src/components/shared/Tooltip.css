@@ -9,12 +9,12 @@
   color: var(--bg-color);
   padding: 6px 10px;
   border-radius: 4px;
-  font-size: 11px;
+  font-size: var(--font-size-md);
   white-space: nowrap;
   z-index: 1000;
   pointer-events: none;
   opacity: 0;
-  animation: tooltipFadeIn 0.2s ease-out forwards;
+  animation: tooltipFadeIn var(--duration-medium) ease-out forwards;
 }
 
 .tooltip-top {

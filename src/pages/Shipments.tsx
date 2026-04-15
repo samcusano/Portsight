@@ -187,8 +187,8 @@ const ShipmentDetail = ({ shipment: s }: ShipmentDetailProps) => {
       </div>
 
       <div className="sm-detail-actions">
-        <button className="sm-sort-btn">View documents</button>
-        <button className="sm-sort-btn">Contact carrier</button>
+        <button className="btn-filter">View documents</button>
+        <button className="btn-filter">Contact carrier</button>
       </div>
     </div>
   );
@@ -328,7 +328,7 @@ const Shipments = () => {
             {(['eta', 'risk', 'route'] as SortKey[]).map((k) => (
               <button
                 key={k}
-                className={`sm-sort-btn${sortKey === k ? ' sm-sort-btn--active' : ''}`}
+                className={`btn-filter${sortKey === k ? ' btn-filter--active' : ''}`}
                 onClick={() => setSortKey(k)}
               >
                 {k === 'eta' ? 'ETA' : k === 'risk' ? 'Risk' : 'Route'}
@@ -350,7 +350,7 @@ const Shipments = () => {
             <div className="sm-empty">
               <span>No shipments match this filter</span>
               <button
-                className="sm-sort-btn"
+                className="btn-filter"
                 onClick={() => { setSeverityFilter('All'); setExceptionFilter('All exceptions'); setSearchQuery(''); }}
               >
                 Clear all filters

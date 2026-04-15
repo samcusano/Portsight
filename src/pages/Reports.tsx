@@ -156,7 +156,7 @@ const Reports = () => {
         {DATE_RANGES.map(r => (
           <button
             key={r}
-            className={`rp-period-btn${dateRange === r ? ' rp-period-btn--active' : ''}`}
+            className={`btn-filter${dateRange === r ? ' btn-filter--active' : ''}`}
             onClick={() => setDateRange(r)}
           >
             {r}

@@ -8,6 +8,7 @@ import { useMemo, useState } from 'react';
 import { TASKS, computeUrgencyScore, DEFAULT_WEIGHTS } from '../data/tasks';
 import type { OperationalTask } from '../data/tasks';
 import { useCountUp } from '../hooks/useCountUp';
+import StatusBadge from '../components/shared/StatusBadge';
 import './Assignments.css';
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -164,7 +165,7 @@ const Assignments = () => {
                   <div className="assign-body-1">
                     <span className="assign-name">{row.name}</span>
                     {row.tasks.length > 1 && (
-                      <span className="assign-task-badge">{row.tasks.length}</span>
+                      <StatusBadge>{row.tasks.length}</StatusBadge>
                     )}
                   </div>
 

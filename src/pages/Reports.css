@@ -49,19 +49,6 @@
   margin-right: var(--space-2);
 }
 
-.rp-period-btn {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.03em;
-  padding: 4px 10px;
-  border: 1px solid var(--line-color);
-  background: transparent;
-  color: var(--ink-3);
-  cursor: pointer;
-  transition: all var(--duration-base);
-}
-.rp-period-btn:hover { border-color: var(--line-em); color: var(--ink-2); }
-.rp-period-btn--active { border-color: var(--brass-border); color: var(--brass); background: var(--brass-dim); }
 
 .rp-period-right {
   margin-left: auto;

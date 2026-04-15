@@ -6,7 +6,7 @@
   background: var(--surface);
   padding: 8px 12px;
   gap: 8px;
-  transition: border-color 0.15s;
+  transition: border-color var(--duration-base);
 }
 .search-bar:focus-within { border-color: var(--brass-border); }
 
@@ -23,7 +23,7 @@
   border: none;
   background: transparent;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: var(--font-size-base);
   outline: none;
   color: var(--text-color);
 }
@@ -42,7 +42,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration-medium);
   flex-shrink: 0;
   color: var(--text-color);
 }

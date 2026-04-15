@@ -44,13 +44,13 @@
 
 .sm-filters {
   display: flex;
-  gap: 5px;
+  gap: var(--space-1);
 }
 
 .sm-chip {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--space-1);
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.03em;
@@ -83,27 +83,12 @@
 .sm-sort {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--space-1);
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--ink-3);
 }
 .sm-sort-label { letter-spacing: 0.03em; }
-
-.sm-sort-btn {
-  background: none;
-  border: 1px solid var(--line-color);
-  color: var(--ink-3);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  padding: 3px 8px;
-  cursor: pointer;
-  letter-spacing: 0.04em;
-  transition: border-color var(--duration-base), color var(--duration-base);
-}
-.sm-sort-btn:hover { border-color: var(--line-em); color: var(--text-color); }
-.sm-sort-btn:active { transform: scale(0.97); transition: transform 0.08s; }
-.sm-sort-btn--active { border-color: var(--brass-border); color: var(--brass); background: var(--brass-dim); }
 
 
 /* ── List — full width ─────────────────────────────────────────────────── */

@@ -1,4 +1,5 @@
 import { Zap, ArrowRight, ExternalLink } from 'lucide-react';
+import StatusBadge from './StatusBadge';
 
 const SEVERITY_LABEL: Record<string, string> = {
   critical: 'Critical',
@@ -87,9 +88,9 @@ const ShipmentRow = ({
           {refs.map((r) => (
             <span key={r} className="dr-tag">{r}</span>
           ))}
-          <span className={`dr-tag dr-tag--severity dr-tag--severity-${severity}`}>
+          <StatusBadge variant={severity as 'critical' | 'watch' | 'clear'}>
             {SEVERITY_LABEL[severity]}
-          </span>
+          </StatusBadge>
         </div>
       </div>
 

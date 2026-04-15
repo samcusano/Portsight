@@ -2,7 +2,7 @@
 
 .task-card {
   border-bottom: 1px solid var(--line-color);
-  transition: background 150ms var(--ease-default);
+  transition: background 150ms ease-out;
 }
 
 /* Actioned state — de-emphasize */
@@ -23,7 +23,7 @@
   text-align: left;
   cursor: pointer;
   color: var(--text-color);
-  transition: background var(--duration-base) var(--ease-default);
+  transition: background var(--duration-base) ease-out;
 }
 
 .task-card__header:hover {
@@ -308,7 +308,7 @@
 .task-card__prob-fill {
   height: 100%;
   background: var(--brass);
-  transition: width var(--duration-slow) var(--ease-default);
+  transition: width var(--duration-slow) ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {

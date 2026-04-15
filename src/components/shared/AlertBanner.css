@@ -44,7 +44,7 @@
 }
 
 .alert-title {
-  font-size: 11px;
+  font-size: var(--font-size-md);
   font-weight: 600;
   display: block;
   white-space: nowrap;
@@ -52,7 +52,7 @@
 }
 
 .alert-message {
-  font-size: 11px;
+  font-size: var(--font-size-md);
   opacity: 0.8;
 }
 
@@ -66,7 +66,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s;
+  transition: opacity var(--duration-medium);
   color: var(--text-color);
 }
 
