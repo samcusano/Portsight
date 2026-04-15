@@ -8,13 +8,6 @@ import './Reports.css';
 const DATE_RANGES = ['7D', '30D', '90D', 'YTD', '12M'] as const;
 type DateRange = typeof DATE_RANGES[number];
 
-const PERIOD_LABEL: Record<DateRange, string> = {
-  '7D':  'Last 7 days',
-  '30D': 'Last 30 days',
-  '90D': 'Last 90 days',
-  'YTD': 'Year to date',
-  '12M': 'Last 12 months',
-};
 
 // ── Briefing data keyed by period ─────────────────────────────────────────
 const BRIEFING = {
