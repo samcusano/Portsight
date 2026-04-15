@@ -14,7 +14,7 @@
   z-index: 1000;
   pointer-events: none;
   opacity: 0;
-  animation: tooltipFadeIn 0.2s forwards;
+  animation: tooltipFadeIn 0.2s ease-out forwards;
 }
 
 .tooltip-top {

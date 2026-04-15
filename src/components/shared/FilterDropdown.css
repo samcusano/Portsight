@@ -19,6 +19,7 @@
   transition: border-color var(--duration-base), color var(--duration-base);
   white-space: nowrap;
 }
+.fd-dropdown-btn:active { transform: scale(0.97); transition: transform 0.08s; }
 .fd-dropdown-btn:hover,
 .fd-dropdown-btn--open {
   border-color: var(--line-em);

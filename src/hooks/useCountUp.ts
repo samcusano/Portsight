@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 /** Animates from 0 to `target` over `duration` ms using an ease-out cubic curve. */
-export function useCountUp(target: number, duration = 700): number {
+export function useCountUp(target: number, duration = 600): number {
   const [value, setValue] = useState(0);
   const raf = useRef<number>();
 

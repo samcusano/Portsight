@@ -162,13 +162,14 @@
 .task-card__body {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 300ms var(--ease-default);
+  transition: max-height 250ms ease-in;
   will-change: max-height;
   background: var(--bg-color);
 }
 
 .task-card__body.is-open {
   max-height: 900px;
+  transition: max-height 300ms ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -262,7 +262,7 @@ h3 { font-size: 22px; line-height: 1.2; }
   height: 8px;
   background: var(--critical-red);
   border-radius: 1px;
-  transition: width 0.8s ease;
+  transition: width 0.3s ease-out;
 }
 
 .risk-bullet-marker {
@@ -706,7 +706,7 @@ nav a.active {
 }
 .shipment-row:hover { background: rgba(204,158,46,0.04); }
 .shipment-row:focus { background: rgba(204,158,46,0.06); border-left-color: var(--brass); }
-.shipment-row:active { transform: none; }
+.shipment-row:active { transform: scale(0.995); }
 
 .shipment-number {
   font-family: var(--font-serif);
