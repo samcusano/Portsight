@@ -167,28 +167,43 @@
 .assign-time--critical { color: var(--critical-red); }
 .assign-time--warning  { color: var(--brass); }
 
-/* Actions — always visible, right-anchored, secondary style (no fill) */
+/* Actions — always visible, right-anchored */
 .assign-actions {
   display: flex;
   gap: 4px;
   flex-shrink: 0;
+}
+
+/* Inline escalation confirm */
+.assign-escalate-confirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.assign-escalate-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--critical-red);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 .assign-action {
   font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 500;
   letter-spacing: 0.03em;
-  padding: 3px 9px;
-  border: 1px solid var(--line-color);
+  padding: 10px 20px;
+  border: 1px solid var(--line-em);
   background: none;
-  color: var(--ink-3);
+  color: var(--ink-2);
   cursor: pointer;
-  transition: border-color var(--duration-base), color var(--duration-base);
+  transition: border-color var(--duration-base), color var(--duration-base), background var(--duration-base);
   white-space: nowrap;
 }
 .assign-action:hover {
-  border-color: var(--line-em);
-  color: var(--text-color);
+  border-color: var(--brass-border);
+  background: var(--brass-dim);
+  color: var(--brass);
 }
 .assign-action:focus-visible {
   outline: 2px solid var(--brass);

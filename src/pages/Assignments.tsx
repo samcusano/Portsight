@@ -4,7 +4,7 @@
 // Row 1: name · task count
 // Row 2: failure mode · exposure · time · Escalate · Reassign · Message
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { TASKS, computeUrgencyScore, DEFAULT_WEIGHTS } from '../data/tasks';
 import type { OperationalTask } from '../data/tasks';
 import './Assignments.css';
@@ -109,6 +109,7 @@ const Assignments = () => {
   const rows = useMemo(buildRows, []);
   const totalExposure = rows.reduce((s, r) => s + r.totalExposure, 0);
   const noActionCount = rows.filter(r => r.status === 'no-action').length;
+  const [escalating, setEscalating] = useState<string | null>(null);
 
   return (
     <div className="assignments-page">
@@ -167,9 +168,28 @@ const Assignments = () => {
                       {formatHours(row.mostUrgentHours)}
                     </span>
                     <div className="assign-actions">
-                      <button className="assign-action assign-action--escalate">Escalate</button>
-                      <button className="assign-action assign-action--reassign">Reassign</button>
-                      <button className="assign-action">Message</button>
+                      {escalating === row.name ? (
+                        <div className="assign-escalate-confirm">
+                          <span className="assign-escalate-label">Confirm escalate?</span>
+                          <button
+                            className="assign-action assign-action--escalate"
+                            onClick={() => setEscalating(null)}
+                          >Yes</button>
+                          <button
+                            className="assign-action"
+                            onClick={() => setEscalating(null)}
+                          >Cancel</button>
+                        </div>
+                      ) : (
+                        <>
+                          <button
+                            className="assign-action assign-action--escalate"
+                            onClick={() => setEscalating(row.name)}
+                          >Escalate</button>
+                          <button className="assign-action assign-action--reassign">Reassign</button>
+                          <button className="assign-action">Message</button>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
