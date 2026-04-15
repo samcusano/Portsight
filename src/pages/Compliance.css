@@ -610,6 +610,10 @@
   justify-content: flex-end;
 }
 
+.cp-confirm-actions .btn-primary {
+  width: auto;
+}
+
 /* ── Success state ── */
 .cp-success-icon { color: var(--clear); }
 
