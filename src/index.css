@@ -1579,9 +1579,11 @@ nav a.active {
 
 .header-notif-panel {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: calc(100% + 8px);
   width: 340px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
   background: var(--surface);
   border: 1px solid var(--line-em);
   box-shadow: 8px 8px 28px rgba(0,0,0,0.55);
