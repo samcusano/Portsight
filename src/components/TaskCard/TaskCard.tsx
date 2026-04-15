@@ -101,7 +101,7 @@ const TaskCard = ({ task, rank, isExpanded, onToggle }: TaskCardProps) => {
         {context.timelineEntries.length > 0 && (
           <div className="task-card__section">
             <div className="task-card__section-label">Timeline</div>
-            <Timeline>
+            <Timeline horizontal>
               {context.timelineEntries.map((entry, i) => (
                 <TimelineItem
                   key={i}

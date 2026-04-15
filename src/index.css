@@ -935,6 +935,57 @@ nav a.active {
 }
 .timeline-content { font-size: 13px; color: var(--ink-2); }
 
+/* ── TIMELINE horizontal variant ── */
+.timeline--horizontal {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.timeline--horizontal .timeline-item {
+  flex: 1;
+  min-width: 100px;
+  position: relative;
+  padding-left: 0;
+  padding-top: 22px;
+  padding-bottom: 0;
+  padding-right: var(--space-4);
+  border-left: none;
+  border-top: 1px solid var(--line-color);
+}
+
+/* Dot sits on the top border line */
+.timeline--horizontal .timeline-item::before {
+  left: 0;
+  top: -4px;
+}
+
+/* Extend the border-top line from dot rightward to next item */
+.timeline--horizontal .timeline-item:last-child {
+  border-top-color: transparent;
+}
+.timeline--horizontal .timeline-item:last-child::before {
+  /* last dot still shows but no line after it */
+  top: -4px;
+}
+
+/* Re-anchor last-item line: draw a partial border only up to dot */
+.timeline--horizontal .timeline-item:last-child::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 4px; /* just enough to meet the dot */
+  height: 1px;
+  background: var(--line-color);
+}
+
+.timeline--horizontal .timeline-date {
+  display: block;
+  margin-bottom: 4px;
+}
+
 /* ── WEATHER GRID ── */
 .weather-grid {
   display: grid;

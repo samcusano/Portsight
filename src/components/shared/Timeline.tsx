@@ -20,11 +20,12 @@ export const TimelineItem = ({ date, content, active = false }: TimelineItemProp
 interface TimelineProps {
   children: React.ReactNode;
   className?: string;
+  horizontal?: boolean;
 }
 
-const Timeline = ({ children, className = '' }: TimelineProps) => {
+const Timeline = ({ children, className = '', horizontal = false }: TimelineProps) => {
   return (
-    <div className={`timeline ${className}`}>
+    <div className={`timeline${horizontal ? ' timeline--horizontal' : ''}${className ? ` ${className}` : ''}`}>
       {children}
     </div>
   );
