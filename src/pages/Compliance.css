@@ -204,6 +204,14 @@
   background: var(--surface);
 }
 
+.cp-panel-wrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  animation: panel-enter 0.18s ease-out both;
+}
+
 .cp-empty-state {
   flex: 1;
   display: flex;

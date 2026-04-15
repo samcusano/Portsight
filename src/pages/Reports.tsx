@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import StatusBadge from '../components/shared/StatusBadge';
 import Button from '../components/shared/Button';
 import DataRow from '../components/shared/DataRow';
+import Sparkline from '../components/shared/Sparkline';
 import './Reports.css';
 
 const DATE_RANGES = ['7D', '30D', '90D', 'YTD', '12M'] as const;
@@ -53,6 +54,7 @@ const BRIEFING = {
       value: '3.2×',
       context: 'Seasonal baseline',
       trend: 'up' as const,
+      spark: [1.8, 2.1, 2.4, 2.9, 3.2],
       detail: '92% SLA breach probability on current Q3 Electronics routing. Oakland dwell time: 1.8 days vs 6.1 days at Long Beach.',
     },
     {
@@ -60,6 +62,7 @@ const BRIEFING = {
       value: '3',
       context: 'Shipments in scope',
       trend: 'up' as const,
+      spark: [0, 0, 1, 2, 3],
       detail: 'FLEX-761034, FLEX-884201, and one additional steel shipment require CBAM declarations. Full enforcement phase begins Jan 2026 with per-shipment penalties.',
     },
     {
@@ -67,6 +70,7 @@ const BRIEFING = {
       value: '42%',
       context: 'On-time delivery',
       trend: 'down' as const,
+      spark: [71, 65, 58, 50, 42],
       detail: 'Average delay 4.8 days vs fleet average 1.2 days. Reliability class C. Impacts FLEX-551847 on KR-ICN → NL-RTM route.',
     },
     {
@@ -74,6 +78,7 @@ const BRIEFING = {
       value: '12',
       context: 'Active audits',
       trend: 'flat' as const,
+      spark: [11, 13, 12, 11, 12],
       detail: 'Unchanged week-over-week. WEEE, CBAM, and ISF categories driving 78% of current holds. Insurance score holding at B+.',
     },
   ],
@@ -221,6 +226,12 @@ const Reports = () => {
                       <TrendIcon trend={ind.trend} />
                       <span className="rp-indicator-value">{ind.value}</span>
                       <span className="rp-indicator-context">{ind.context}</span>
+                      {ind.spark && (
+                        <Sparkline
+                          data={ind.spark}
+                          color={ind.trend === 'down' ? 'var(--critical-red)' : ind.trend === 'flat' ? 'var(--ink-3)' : 'var(--brass)'}
+                        />
+                      )}
                     </div>
                   </div>
                   <p className="rp-indicator-detail">{ind.detail}</p>

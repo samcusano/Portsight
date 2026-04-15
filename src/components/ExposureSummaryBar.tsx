@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { TASKS } from '../data/tasks';
+import { useCountUp } from '../hooks/useCountUp';
 import './ExposureSummaryBar.css';
 
 const ExposureSummaryBar = () => {
@@ -28,6 +29,12 @@ const ExposureSummaryBar = () => {
     return { totalExposure, criticalCount, dueTodayCount, actionedCount, total: active.length };
   }, []);
 
+  const animExposure   = useCountUp(stats.totalExposure);
+  const animCritical   = useCountUp(stats.criticalCount);
+  const animDueToday   = useCountUp(stats.dueTodayCount);
+  const animActioned   = useCountUp(stats.actionedCount);
+  const animTotal      = useCountUp(stats.total);
+
   function formatUsd(n: number): string {
     if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
     if (n >= 1_000) return `$${Math.round(n / 1_000)}K`;
@@ -38,7 +45,7 @@ const ExposureSummaryBar = () => {
     <div className="exp-bar" role="region" aria-label="Exposure summary">
       <div className="exp-bar__tile">
         <span className="exp-bar__value exp-bar__value--exposure">
-          {formatUsd(stats.totalExposure)}
+          {formatUsd(animExposure)}
         </span>
         <span className="exp-bar__label">Total exposure</span>
       </div>
@@ -47,7 +54,7 @@ const ExposureSummaryBar = () => {
 
       <div className="exp-bar__tile">
         <span className={`exp-bar__value${stats.criticalCount > 0 ? ' exp-bar__value--critical' : ''}`}>
-          {stats.criticalCount}
+          {animCritical}
         </span>
         <span className="exp-bar__label">Critical (&lt;12h)</span>
       </div>
@@ -56,7 +63,7 @@ const ExposureSummaryBar = () => {
 
       <div className="exp-bar__tile">
         <span className={`exp-bar__value${stats.dueTodayCount > 0 ? ' exp-bar__value--warning' : ''}`}>
-          {stats.dueTodayCount}
+          {animDueToday}
         </span>
         <span className="exp-bar__label">Due today</span>
       </div>
@@ -65,7 +72,7 @@ const ExposureSummaryBar = () => {
 
       <div className="exp-bar__tile">
         <span className="exp-bar__value exp-bar__value--muted">
-          {stats.actionedCount} / {stats.total}
+          {animActioned} / {animTotal}
         </span>
         <span className="exp-bar__label">Actioned</span>
       </div>

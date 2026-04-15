@@ -7,6 +7,7 @@
 import { useMemo, useState } from 'react';
 import { TASKS, computeUrgencyScore, DEFAULT_WEIGHTS } from '../data/tasks';
 import type { OperationalTask } from '../data/tasks';
+import { useCountUp } from '../hooks/useCountUp';
 import './Assignments.css';
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -110,6 +111,9 @@ const Assignments = () => {
   const totalExposure = rows.reduce((s, r) => s + r.totalExposure, 0);
   const noActionCount = rows.filter(r => r.status === 'no-action').length;
   const [escalating, setEscalating] = useState<string | null>(null);
+  const animAssignees = useCountUp(rows.length);
+  const animExposure  = useCountUp(totalExposure);
+  const animNoAction  = useCountUp(noActionCount);
 
   return (
     <div className="assignments-page">
@@ -118,32 +122,36 @@ const Assignments = () => {
       {/* Stat strip */}
       <div className="assign-stat-strip">
         <div className="assign-stat">
-          <span className="assign-stat-value">{rows.length}</span>
+          <span className="assign-stat-value">{animAssignees}</span>
           <span className="assign-stat-label">Assignees</span>
         </div>
         <div className="assign-stat-divider" />
         <div className="assign-stat">
-          <span className="assign-stat-value assign-stat-value--brass">{formatUsd(totalExposure)}</span>
+          <span className="assign-stat-value assign-stat-value--brass">{formatUsd(animExposure)}</span>
           <span className="assign-stat-label">Total exposure</span>
         </div>
         <div className="assign-stat-divider" />
         <div className="assign-stat">
           <span className={`assign-stat-value${noActionCount > 0 ? ' assign-stat-value--critical' : ''}`}>
-            {noActionCount}
+            {animNoAction}
           </span>
           <span className="assign-stat-label">No action taken</span>
         </div>
       </div>
 
       <main id="main-content" className="assign-list">
-        {rows.map(row => {
+        {rows.map((row, i) => {
           const edge = edgeTier(row.mostUrgentHours, row.status);
           const timeClass =
             edge === 'edge--critical' ? 'assign-time--critical' :
             edge === 'edge--warning'  ? 'assign-time--warning'  : '';
 
           return (
-            <div key={row.name} className={`assign-item ${edge}`}>
+            <div
+              key={row.name}
+              className={`assign-item ${edge} row-enter`}
+              style={{ '--row-i': i } as React.CSSProperties}
+            >
               <div className="assign-row">
                 {/* Avatar */}
                 <div className="assign-avatar-wrap">

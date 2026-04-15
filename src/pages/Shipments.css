@@ -184,6 +184,7 @@
   border-radius: 50%;
   transform: translate(-50%, -50%);
   border: 2px solid var(--surface);
+  transition: left var(--duration-slow);
 }
 
 .sm-timeline-exception {

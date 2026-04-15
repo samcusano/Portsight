@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AlertBanner from '../components/shared/AlertBanner';
 import ShipmentRow from '../components/shared/ShipmentRow';
@@ -131,6 +131,8 @@ interface ShipmentDetailProps { shipment: ShipmentData; }
 const ShipmentDetail = ({ shipment: s }: ShipmentDetailProps) => {
   const exType = getExceptionType(s);
   const hasException = exType !== 'none';
+  const [ready, setReady] = useState(false);
+  useEffect(() => { const id = requestAnimationFrame(() => setReady(true)); return () => cancelAnimationFrame(id); }, []);
 
   return (
     <div className="sm-detail">
@@ -139,8 +141,8 @@ const ShipmentDetail = ({ shipment: s }: ShipmentDetailProps) => {
         <div className="sm-timeline-track">
           <span className="sm-timeline-port">{originCode(s.route)}</span>
           <div className="sm-timeline-bar">
-            <div className="sm-timeline-fill" style={{ width: `${s.progressPct}%` }} />
-            <div className="sm-timeline-head" style={{ left: `${s.progressPct}%` }} />
+            <div className="sm-timeline-fill" style={{ width: ready ? `${s.progressPct}%` : '0%' }} />
+            <div className="sm-timeline-head" style={{ left: ready ? `${s.progressPct}%` : '0%' }} />
             {hasException && (
               <div
                 className="sm-timeline-exception"
@@ -355,8 +357,8 @@ const Shipments = () => {
               </button>
             </div>
           ) : (
-            filtered.map((s) => (
-              <div key={s.id}>
+            filtered.map((s, i) => (
+              <div key={s.id} className="row-enter" style={{ '--row-i': i } as React.CSSProperties}>
                 <ShipmentRow
                   {...s}
                   active={detailId === s.id}

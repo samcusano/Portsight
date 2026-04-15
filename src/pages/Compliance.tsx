@@ -405,18 +405,19 @@ const Compliance = () => {
                 {cards.length === 0 ? (
                   <div className="cp-col-empty">—</div>
                 ) : (
-                  cards.map(s => (
-                    <TriageCard
-                      key={s.id}
-                      shipment={s}
-                      status={boardState[s.id]}
-                      active={selectedId === s.id}
-                      onClick={() => {
-                        setSelectedId(s.id);
-                        navigate(`/compliance/${s.id}`, { replace: true });
-                      }}
-                      onAdvance={(e) => { e.stopPropagation(); advance(s.id); }}
-                    />
+                  cards.map((s, i) => (
+                    <div key={s.id} className="row-enter" style={{ '--row-i': i } as React.CSSProperties}>
+                      <TriageCard
+                        shipment={s}
+                        status={boardState[s.id]}
+                        active={selectedId === s.id}
+                        onClick={() => {
+                          setSelectedId(s.id);
+                          navigate(`/compliance/${s.id}`, { replace: true });
+                        }}
+                        onAdvance={(e) => { e.stopPropagation(); advance(s.id); }}
+                      />
+                    </div>
                   ))
                 )}
               </div>
@@ -427,17 +428,21 @@ const Compliance = () => {
         {/* Right — action view */}
         <div className="cp-main" id="main-content">
           {selected ? (
-            <ActionView
-              shipment={selected}
-              status={boardState[selected.id]}
-              assignee={assignees[selected.id]}
-              onAssigneeChange={(a) => setAssignees(prev => ({ ...prev, [selected.id]: a }))}
-              onAdvance={() => advance(selected.id)}
-              onResolve={() => resolve(selected.id)}
-            />
+            <div key={selected.id} className="cp-panel-wrap">
+              <ActionView
+                shipment={selected}
+                status={boardState[selected.id]}
+                assignee={assignees[selected.id]}
+                onAssigneeChange={(a) => setAssignees(prev => ({ ...prev, [selected.id]: a }))}
+                onAdvance={() => advance(selected.id)}
+                onResolve={() => resolve(selected.id)}
+              />
+            </div>
           ) : (
-            <div className="cp-empty-state">
-              <span className="label">Select a violation to begin resolution</span>
+            <div key="empty" className="cp-panel-wrap">
+              <div className="cp-empty-state">
+                <span className="label">Select a violation to begin resolution</span>
+              </div>
             </div>
           )}
         </div>
