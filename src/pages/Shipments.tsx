@@ -157,9 +157,6 @@ const ShipmentDetail = ({ shipment: s }: ShipmentDetailProps) => {
           <span className="sm-timeline-pct">{s.progressPct}% complete</span>
           {hasException && (
             <span className="sm-timeline-cause">
-              <span className={`sm-exception-badge sm-exception-badge--${exType}`}>
-                {exceptionLabel(exType)}
-              </span>
               {s.cause}
             </span>
           )}
