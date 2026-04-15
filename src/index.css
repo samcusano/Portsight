@@ -180,11 +180,13 @@
 body {
   overflow: hidden; /* prevent body scroll — layout is handled per-column */
   background-color: var(--bg-color);
-  /* Nautical chart-paper grid */
+  /* Nautical chart — depth contour arcs + Mercator dot grid */
   background-image:
-    linear-gradient(rgba(204,158,46,0.030) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(204,158,46,0.030) 1px, transparent 1px);
-  background-size: 40px 40px;
+    radial-gradient(ellipse 140vw 90vh at -8% 108%, rgba(204,158,46,0.030) 0, transparent 1.5px),
+    radial-gradient(ellipse 100vw 65vh at -8% 108%, rgba(204,158,46,0.030) 0, transparent 1.5px),
+    radial-gradient(ellipse  65vw 42vh at -8% 108%, rgba(204,158,46,0.030) 0, transparent 1.5px),
+    radial-gradient(circle, rgba(204,158,46,0.09) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px;
   color: var(--text-color);
   font-family: var(--font-sans);
   font-size: 16px;
@@ -870,10 +872,13 @@ nav a.active {
 .map-container {
   flex-grow: 1;
   background: var(--surface-2);
+  /* Plotting chart — depth contour arcs + tighter dot grid */
   background-image:
-    linear-gradient(rgba(204,158,46,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(204,158,46,0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
+    radial-gradient(ellipse 140vw 90vh at -8% 108%, rgba(204,158,46,0.05) 0, transparent 1.5px),
+    radial-gradient(ellipse 100vw 65vh at -8% 108%, rgba(204,158,46,0.05) 0, transparent 1.5px),
+    radial-gradient(ellipse  65vw 42vh at -8% 108%, rgba(204,158,46,0.05) 0, transparent 1.5px),
+    radial-gradient(circle, rgba(204,158,46,0.12) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px;
   position: relative;
   border-bottom: 1px solid var(--line-color);
   overflow: hidden;
