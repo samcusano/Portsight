@@ -73,7 +73,7 @@ const TaskCard = ({ task, rank, isExpanded, onToggle }: TaskCardProps) => {
           <p className="task-card__problem">{problemStatement}</p>
           <div className="task-card__strip">
             <span className={`task-card__type task-card__type--${type}`}>
-              {typeLabel(type).toUpperCase()}
+              {typeLabel(type)}
             </span>
             <span className="task-card__sep">—</span>
             <span className={`task-card__deadline task-card__deadline--${urgency}`}>
@@ -133,7 +133,7 @@ const TaskCard = ({ task, rank, isExpanded, onToggle }: TaskCardProps) => {
                   {context.relatedShipmentIds.map(id => (
                     <button
                       key={id}
-                      className="status-badge"
+                      className="task-card__related-chip"
                       onClick={(e) => {
                         e.stopPropagation();
                         navigate(`/compliance/${id}`);

@@ -30,9 +30,8 @@
 .rp-page-period {
   font-family: var(--font-mono);
   font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-4);
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
 }
 
 /* ── Period bar ────────────────────────────────────────────────────────── */
@@ -53,12 +52,11 @@
 .rp-period-btn {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
   padding: 4px 10px;
   border: 1px solid var(--line-color);
   background: transparent;
-  color: var(--ink-4);
+  color: var(--ink-3);
   cursor: pointer;
   transition: all var(--duration-base);
 }
@@ -106,8 +104,8 @@
 .rp-section-num {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--ink-4);
-  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  letter-spacing: 0.03em;
 }
 
 .rp-section-title {
@@ -121,8 +119,7 @@
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--ink-3);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
   margin-left: auto;
 }
 
@@ -161,9 +158,8 @@
 .rp-event-id {
   font-family: var(--font-mono);
   font-size: 9px;
-  letter-spacing: 0.07em;
-  color: var(--ink-4);
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
 }
 
 .rp-event-impact {
@@ -184,9 +180,8 @@
 .rp-event-impact-label {
   font-family: var(--font-mono);
   font-size: 9px;
-  color: var(--ink-4);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  letter-spacing: 0.03em;
   margin-top: 2px;
 }
 
@@ -243,8 +238,7 @@
 .rp-indicator-label {
   font-family: var(--font-mono);
   font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.03em;
   color: var(--ink-3);
 }
 
@@ -273,8 +267,8 @@
 .rp-indicator-context {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--ink-4);
-  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  letter-spacing: 0.03em;
 }
 
 .rp-indicator-detail {
@@ -302,7 +296,7 @@
 .rp-decision-rank {
   font-family: var(--font-mono);
   font-size: 13px;
-  color: var(--ink-4);
+  color: var(--ink-3);
   font-weight: 600;
   flex-shrink: 0;
   padding-top: 2px;
@@ -355,8 +349,7 @@
 .rp-effort {
   font-family: var(--font-mono);
   font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.03em;
   padding: 2px 6px;
   border: 1px solid;
 }
@@ -367,8 +360,8 @@
 .rp-decision-deadline {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--ink-4);
-  letter-spacing: 0.04em;
+  color: var(--ink-3);
+  letter-spacing: 0.03em;
 }
 
 /* ── Sidebar ───────────────────────────────────────────────────────────── */

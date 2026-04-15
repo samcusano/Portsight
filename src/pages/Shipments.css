@@ -39,7 +39,7 @@
   outline: none;
   transition: border-color var(--duration-base);
 }
-.sm-search::placeholder { color: var(--ink-4); }
+.sm-search::placeholder { color: var(--ink-3); }
 .sm-search:focus { border-color: var(--line-em); }
 
 .sm-filters {
@@ -53,12 +53,11 @@
   gap: 5px;
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
   padding: 4px 9px;
   border: 1px solid var(--line-color);
   background: transparent;
-  color: var(--ink-4);
+  color: var(--ink-3);
   cursor: pointer;
   transition: all var(--duration-base);
 }
@@ -87,9 +86,9 @@
   gap: 5px;
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--ink-4);
+  color: var(--ink-3);
 }
-.sm-sort-label { letter-spacing: 0.05em; text-transform: uppercase; }
+.sm-sort-label { letter-spacing: 0.03em; }
 
 .sm-sort-btn {
   background: none;
@@ -156,10 +155,9 @@
 .sm-timeline-port {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
   color: var(--ink-3);
   flex-shrink: 0;
-  text-transform: uppercase;
   min-width: 32px;
 }
 
@@ -216,7 +214,7 @@
   letter-spacing: 0.04em;
 }
 
-.sm-timeline-pct { color: var(--ink-4); }
+.sm-timeline-pct { color: var(--ink-3); }
 .sm-timeline-eta { color: var(--ink-3); margin-left: auto; }
 
 .sm-timeline-cause {
@@ -242,9 +240,8 @@
 .sm-detail-label {
   font-family: var(--font-mono);
   font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ink-4);
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
 }
 
 .sm-detail-value {

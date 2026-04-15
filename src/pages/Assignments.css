@@ -49,9 +49,8 @@
 .assign-stat-label {
   font-family: var(--font-mono);
   font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--ink-4);
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
 }
 
 /* List */
@@ -131,7 +130,7 @@
   font-size: 9px;
   padding: 1px 5px;
   border: 1px solid var(--line-color);
-  color: var(--ink-4);
+  color: var(--ink-3);
   flex-shrink: 0;
 }
 
@@ -177,13 +176,12 @@
 .assign-action {
   font-family: var(--font-mono);
   font-size: 9px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   padding: 3px 9px;
   border: 1px solid var(--line-color);
   background: none;
-  color: var(--ink-4);
+  color: var(--ink-3);
   cursor: pointer;
   transition: border-color var(--duration-base), color var(--duration-base);
   white-space: nowrap;

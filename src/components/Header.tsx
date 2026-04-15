@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import StatusIndicator from './shared/StatusIndicator';
-import { Bell } from 'lucide-react';
+import { Bell, LayoutDashboard, Globe, Logs, ChartNetwork, ListTodo } from 'lucide-react';
 import './Header.css';
 
 interface Notification {
@@ -25,11 +25,11 @@ const NOTIFICATION_GROUP_LABELS: Partial<Record<Notification['type'], string>> =
 };
 
 const NAV_LINKS = [
-  { to: '/',             label: 'Command'     },
-  { to: '/shipments',    label: 'Fleet'       },
-  { to: '/compliance',   label: 'Exposure'    },
-  { to: '/reports',      label: 'Analytics'   },
-  { to: '/assignments',  label: 'Assignments' },
+  { to: '/',             label: 'Command',     icon: LayoutDashboard },
+  { to: '/shipments',    label: 'Fleet',       icon: Globe           },
+  { to: '/compliance',   label: 'Exposure',    icon: Logs            },
+  { to: '/reports',      label: 'Analytics',   icon: ChartNetwork    },
+  { to: '/assignments',  label: 'Assignments', icon: ListTodo        },
 ];
 
 const Header = () => {
@@ -80,8 +80,9 @@ const Header = () => {
 
       {/* Nav links */}
       <nav aria-label="Main navigation">
-        {NAV_LINKS.map(({ to, label }) => (
+        {NAV_LINKS.map(({ to, label, icon: Icon }) => (
           <Link key={to} to={to} className={isActive(to) ? 'active' : ''}>
+            <Icon size={14} strokeWidth={1.5} aria-hidden="true" />
             {label}
           </Link>
         ))}

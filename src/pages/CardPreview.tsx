@@ -109,7 +109,7 @@ function TreatmentB({ tasks }: { tasks: PreviewTask[] }) {
             <div className="cp-b__body">
               <p className="cp-b__problem">{t.problem}</p>
               <div className="cp-b__strip">
-                <span className={`cp-b__type cp-b__type--${t.type}`}>{t.typeLabel.toUpperCase()}</span>
+                <span className={`cp-b__type cp-b__type--${t.type}`}>{t.typeLabel}</span>
                 <span className="cp-b__sep">—</span>
                 <span className={`cp-b__deadline cp-b__deadline--${t.urgency}`}>{t.hoursLabel} remaining</span>
                 <span className="cp-b__sep">—</span>
@@ -137,17 +137,17 @@ function TreatmentC({ tasks }: { tasks: PreviewTask[] }) {
     <div className="cp-list cp-list--terminal">
       <div className="cp-c__header-row">
         <span className="cp-c__col cp-c__col--rank">#</span>
-        <span className="cp-c__col cp-c__col--type">TYPE</span>
-        <span className="cp-c__col cp-c__col--problem">PROBLEM</span>
-        <span className="cp-c__col cp-c__col--impact">EXPOSURE</span>
-        <span className="cp-c__col cp-c__col--time">DEADLINE</span>
-        <span className="cp-c__col cp-c__col--conf">CONF</span>
+        <span className="cp-c__col cp-c__col--type">Type</span>
+        <span className="cp-c__col cp-c__col--problem">Problem</span>
+        <span className="cp-c__col cp-c__col--impact">Exposure</span>
+        <span className="cp-c__col cp-c__col--time">Deadline</span>
+        <span className="cp-c__col cp-c__col--conf">Conf</span>
       </div>
       {tasks.map(t => (
         <div key={t.rank} className={`cp-c cp-c--${t.urgency}`}>
           <span className="cp-c__col cp-c__col--rank">{String(t.rank).padStart(2, '0')}</span>
           <span className={`cp-c__col cp-c__col--type cp-c__type--${t.type}`}>
-            {t.typeLabel.toUpperCase().substring(0, 11)}
+            {t.typeLabel.substring(0, 11)}
           </span>
           <span className="cp-c__col cp-c__col--problem">{t.problem}</span>
           <span className="cp-c__col cp-c__col--impact">{t.impact}</span>
@@ -173,7 +173,7 @@ function TreatmentD({ tasks }: { tasks: PreviewTask[] }) {
           <div className="cp-d__left">
             <div className="cp-d__top">
               <span className="cp-d__rank">{String(t.rank).padStart(2, '0')}</span>
-              <span className={`cp-d__type cp-d__type--${t.type}`}>{t.typeLabel.toUpperCase()}</span>
+              <span className={`cp-d__type cp-d__type--${t.type}`}>{t.typeLabel}</span>
               <span className={`cp-d__time cp-d__time--${t.urgency}`}>{t.hoursLabel}</span>
             </div>
             <p className="cp-d__problem">{t.problem}</p>
@@ -274,11 +274,11 @@ function TreatmentG({ tasks }: { tasks: PreviewTask[] }) {
       {tasks.map(t => (
         <div key={t.rank} className={`cp-g cp-g--${t.urgency}`}>
           <span className="cp-g__rank">{String(t.rank).padStart(2, '0')}</span>
-          <span className={`cp-g__type cp-g__type--${t.type}`}>{t.typeLabel.toUpperCase()}</span>
+          <span className={`cp-g__type cp-g__type--${t.type}`}>{t.typeLabel}</span>
           <span className="cp-g__gap" />
           <span className="cp-g__problem">{t.problem}</span>
           <span className="cp-g__gap" />
-          <span className={`cp-g__time cp-g__time--${t.urgency}`}>{t.hoursLabel.toUpperCase()}</span>
+          <span className={`cp-g__time cp-g__time--${t.urgency}`}>{t.hoursLabel}</span>
           <span className="cp-g__sep" />
           <span className="cp-g__impact">{t.impact}</span>
           <span className="cp-g__sep" />
